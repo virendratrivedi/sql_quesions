@@ -1,0 +1,19 @@
+Question 11:- 
+CREATE TABLE Student (
+    ID INT PRIMARY KEY NOT NULL,
+    Name VARCHAR(20) NOT NULL,
+    Age INT NOT NULL,
+    Address VARCHAR(25)
+);
+
+Inserting 5 Records:-
+INSERT INTO Student (ID, Name, Age, Address)
+VALUES
+    (1, 'Arpit Trivedi', 20, '123 Main St'),
+    (2, 'Sanju Bohra', 22, '456 ram bagh'),
+    (3, 'Michael sharma', 21, '789 Oak Rd'),
+    (4, 'Emily Roo', 19, '101 Pine Line'),
+    (5, 'David jain', 23, '555 Mumbai road');
+
+
+Question 12:- 
