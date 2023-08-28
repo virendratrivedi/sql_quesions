@@ -1,5 +1,5 @@
 Question 11:- 
-CREATE TABLE Student (
+Answer :- CREATE TABLE Student (
     ID INT PRIMARY KEY NOT NULL,
     Name VARCHAR(20) NOT NULL,
     Age INT NOT NULL,
@@ -17,3 +17,79 @@ VALUES
 
 
 Question 12:- 
+Write an SQL query to find the youngest student in the "student" table ?
+
+Answer :- select * from student  order by Age Limit 1
+
+Quesion 13:-  Write an SQL query to retrieve the names and addresses of all persons from the "Person" table along with their corresponding addresses from the "Address" table.
+Answer :- 
+SELECT
+    p.Name,
+    a.Address
+FROM
+    Person p
+JOIN
+    Address a ON p.PersonID = a.PersonID;
+
+Question 14 :- Write an SQL query to fetch the second highest number from the "student" table.?
+Answer :- SELECT * from student  order by Age Limit 2,1
+
+Question 15:-  SQL Quary to get the nth highest salary from Employee table
+Answer :- SELECT DISTINCT Salary
+FROM Employee
+ORDER BY Salary DESC
+LIMIT 1 OFFSET n - 1;
+
+Question 16 :-  Write a SQL query to find the median salary of each company.?
+Answer :- select companyname, AVG(Salary) As median_salary from (Select companyname,salary,roll_number() OVER (PARTITION By companyname Order BY Salary) As row_num,count(*) 
+
+Question 17:- Write a SQL to get the cumulative sum of an employee’s salary over a period of 3 month but exclude the most recent month? The result should be display by id ascending and then by month decending ?
+Answer:- 
+
+WITH RankedSalaries AS (
+    SELECT
+        EmployeeID,
+        Salary,
+        ROW_NUMBER() OVER (PARTITION BY EmployeeID ORDER BY Year DESC, Month DESC) AS RowNum
+    FROM SalaryData
+)
+SELECT
+    rs.EmployeeID,
+    rs.Salary,
+    SUM(rs.Salary) OVER (PARTITION BY rs.EmployeeID ORDER BY rs.RowNum ROWS BETWEEN 2 PRECEDING AND 1 PRECEDING) AS CumulativeSum
+FROM RankedSalaries rs
+WHERE rs.RowNum <= 3;
+
+Question 19:-
+SELECT
+    c.CustomerName,
+    COUNT(o.OrderID) AS OrderCount
+FROM
+    Customers c
+JOIN
+    Orders o ON c.CustomerID = o.CustomerID
+GROUP BY
+    c.CustomerName
+ORDER BY
+    OrderCount DESC, c.CustomerName ASC
+LIMIT 5;
+
+
+Question 20:- 
+
+SELECT
+    b.title AS ProductName,
+    SUM(o.quantity) AS TotalQuantitySold
+FROM
+    books b
+JOIN
+    orders o ON b.book_id = o.book_id
+GROUP BY
+    b.book_id, b.title
+ORDER BY
+    TotalQuantitySold DESC
+LIMIT 3;
+
+
+
+
